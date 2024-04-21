@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
 
 from .choices import EXPERIENCE_TYPES
 
@@ -20,10 +21,14 @@ class QualifyExecutorsFilter(admin.SimpleListFilter):
 
 
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    fields = ['last_name', 'first_name', 'username', 'email', 'password',
-              'is_customer', 'about', 'experience', 'telegram',
-              'last_login', 'date_joined', 'is_staff']
+class UserAdmin(UserAdmin):
+    fieldsets = (
+        (None, {"fields": ('username', 'password')}),
+        (("Персональная информация"), {"fields": ("last_name", "first_name")}),
+        (("Даты"), {"fields": ("last_login", "date_joined")}),
+        (("Контакты"), {"fields": ("email", "telegram")}),
+        (("Профессиональная информация"), {"fields": ("is_customer", "about", "experience")}),
+    )
     list_display = ('last_name', 'first_name', 'email', 'telegram', 'is_customer')
     ordering = ('last_name', 'first_name')
     list_per_page = 10
