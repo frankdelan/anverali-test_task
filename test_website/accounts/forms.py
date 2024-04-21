@@ -1,17 +1,15 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
+from users.choices import EXPERIENCE_TYPES
+
 User = get_user_model()
 
 
 class EditExecutorForm(forms.ModelForm):
     about = forms.CharField(label='О себе', max_length=1000, widget=forms.Textarea(attrs={'rows': 4}))
 
-    experience = forms.ChoiceField(label='Опыт работы', choices=(('Нет опыта', 'Нет опыта'),
-                                                                 ('Несколько месяцев', 'Несколько месяцев'),
-                                                                 ('От 1 до 3 лет', 'От 1 до 3 лет'),
-                                                                 ('От 3 до 5 лет', 'От 3 до 5 лет'),
-                                                                 ('Более 5 лет', 'Более 5 лет')))
+    experience = forms.ChoiceField(label='Опыт работы', choices=EXPERIENCE_TYPES)
 
     telegram = forms.CharField(label='Telegram', widget=forms.TextInput(attrs={'placeholder': "@example"}))
 
