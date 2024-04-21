@@ -1,0 +1,11 @@
+{% extends 'users/base.html' %}
+{% block formblock %}
+<div class="container">
+    <form action="{% url 'users:login_page' %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+<p>У вас еще нет аккаунта? <a href="{% url 'users:register_page' %}">Создать</a></p>
+{% endblock %}

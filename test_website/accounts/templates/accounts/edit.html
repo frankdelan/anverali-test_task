@@ -1,0 +1,12 @@
+{% extends 'accounts/base.html' %}
+
+{% block info %}
+<div class="edit-container">
+    <h2>Редактировать профиль</h2>
+    <form action="{% url 'accounts:edit_page' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+{% endblock %}
