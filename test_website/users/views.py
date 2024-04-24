@@ -7,7 +7,7 @@ from users.forms import RegisterForm, LoginForm
 
 
 def register(request):
-    if request.POST:
+    if request.method == 'POST':
         form = RegisterForm(data=request.POST)
         if form.is_valid():
             form.save()
@@ -20,7 +20,7 @@ def register(request):
 
 
 def login(request):
-    if request.POST:
+    if request.method == 'POST':
         form = LoginForm(data=request.POST)
         if form.is_valid():
             user = auth.authenticate(username=request.POST.get('username'),

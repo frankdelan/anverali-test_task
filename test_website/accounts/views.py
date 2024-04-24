@@ -19,7 +19,7 @@ def show_profile(request):
 
 @login_required(login_url='users:login_page')
 def edit_profile(request):
-    if request.POST:
+    if request.method == 'POST':
         if request.user.is_customer:
             form = EditCustomerForm(request.POST, instance=request.user)
         else:
