@@ -14,3 +14,6 @@ class User(AbstractUser):
                                   choices=EXPERIENCE_TYPES)
 
     telegram = models.CharField(blank=True, verbose_name='Telegram')
+
+    photo = models.ImageField(upload_to='uploads/', null=True, blank=True)
+

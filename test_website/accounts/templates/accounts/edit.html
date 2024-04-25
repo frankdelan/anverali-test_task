@@ -3,7 +3,8 @@
 {% block info %}
 <div class="edit-container">
     <h2>Редактировать профиль</h2>
-    <form action="{% url 'accounts:edit_page' %}" method="post">
+
+    <form action="{% url 'accounts:edit_page' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <button type="submit">Сохранить</button>

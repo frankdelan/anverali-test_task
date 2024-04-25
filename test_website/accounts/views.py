@@ -7,7 +7,6 @@ from accounts.forms import EditExecutorForm, EditCustomerForm
 
 
 # Create your views here.
-
 def start(request):
     return render(request, 'accounts/index.html')
 
@@ -21,9 +20,9 @@ def show_profile(request):
 def edit_profile(request):
     if request.method == 'POST':
         if request.user.is_customer:
-            form = EditCustomerForm(request.POST, instance=request.user)
+            form = EditCustomerForm(request.POST, request.FILES, instance=request.user)
         else:
-            form = EditExecutorForm(request.POST, instance=request.user)
+            form = EditExecutorForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('accounts:account_page'))

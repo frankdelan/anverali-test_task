@@ -4,25 +4,25 @@
 <div class="profile">
     {% if user.is_customer %}
         <h2>Личный кабинет заказчика</h2>
-        <div class="info">
-            <p><b>Фамилия</b>: {{user.last_name}}</p>
-            <p><b>Имя</b>: {{user.first_name}}</p>
-            <p><b>Email</b>: {{user.email}}</p>
-            <p><b>Telegram</b>: {{user.telegram}}</p>
-            <p><b>Последний раз был в сети</b>: {{user.last_login}}</p>
-        </div>
     {% else %}
         <h2>Личный кабинет исполнителя</h2>
-        <div class="info">
-            <p><b>Фамилия</b>: {{user.last_name}}</p>
-            <p><b>Имя</b>: {{user.first_name}}</p>
-            <p><b>Email</b>: {{user.email}}</p>
-            <p><b>Telegram</b>: {{user.telegram}}</p>
+    {% endif %}
+    <div class="info">
+        {% if user.photo %}
+            <p><img src="{{user.photo.url}}"></p>
+        {% endif %}
+        <p><b>Фамилия</b>: {{user.last_name}}</p>
+        <p><b>Имя</b>: {{user.first_name}}</p>
+        <p><b>Email</b>: {{user.email}}</p>
+        <p><b>Telegram</b>: {{user.telegram}}</p>
+        {% if user.is_customer %}
+            <p><b>Последний раз был в сети</b>: {{user.last_login}}</p>
+        {% else %}
             <p><b>Дата регистрации</b>: {{user.date_joined}}</p>
             <p><b>О себе</b>: {{user.about}}</p>
             <p><b>Опыт работы</b>: {{user.experience}}</p>
-        </div>
-    {% endif %}
+        {% endif %}
+    </div>
     <a href="{% url 'accounts:edit_page' %}">Изменить</a>
 </div>
 
